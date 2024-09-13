@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 210mm;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .rounded-img {
+            display: block;
+            margin-top: 10px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .collapse-section {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+        }
+        .section-content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        .section-content.open {
+            display: block;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .add-more-btn {
+            margin-top: 10px;
+            background-color: #5bc0de;
+            border: none;
+            cursor: pointer;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Resume Form</h2>
+
+    <!-- Profile Photo -->
+    <div class="form-group">
+        <label for="profilePhoto">Profile Photo:</label>
+        <input type="file" id="profilePhoto" accept="image/*" onchange="previewImage(event)">
+        <img id="profileImage" class="rounded-img" src="" alt="Profile Photo" style="display: none;">
+    </div>
+
+    <!-- Basic Details -->
+    <div class="collapse-section" onclick="toggleSection('basicDetails')">Basic Details</div>
+    <div id="basicDetails" class="section-content open">
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName">
+        </div>
+        <div class="form-group">
+            <label for="course">Course:</label>
+            <input type="text" id="course" name="course">
+        </div>
+        <div class="form-group">
+            <label for="specialization">Specialization:</label>
+            <input type="text" id="specialization" name="specialization">
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob">
+        </div>
+        <div class="form-group">
+            <label for="bloodGroup">Blood Group:</label>
+            <input type="text" id="bloodGroup" name="bloodGroup">
+        </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="collapse-section" onclick="toggleSection('skillsSection')">Skills</div>
+    <div id="skillsSection" class="section-content">
+        <textarea id="skills" rows="3" placeholder="Enter skills"></textarea>
+    </div>
+
+    <!-- Education -->
+    <div class="collapse-section" onclick="toggleSection('educationSection')">Education Details</div>
+    <div id="educationSection" class="section-content">
+        <div id="educationFields">
+            <div class="form-group">
+                <label for="institution">Institution:</label>
+                <input type="text" id="institution" name="institution">
+            </div>
+            <div class="form-group">
+                <label for="degree">Degree:</label>
+                <input type="text" id="degree" name="degree">
+            </div>
+            <div class="form-group">
+                <label for="eduStartDate">Start Date:</label>
+                <input type="date" id="eduStartDate" name="eduStartDate">
+            </div>
+            <div class="form-group">
+                <label for="eduEndDate">End Date:</label>
+                <input type="date" id="eduEndDate" name="eduEndDate">
+            </div>
+        </div>
+        <button type="button" class="add-more-btn" onclick="addMore('educationFields')">+ Add More Education</button>
+    </div>
+
+    <!-- Internship -->
+    <div class="collapse-section" onclick="toggleSection('internshipSection')">Internship Experience</div>
+    <div id="internshipSection" class="section-content">
+        <div id="internshipFields">
+            <div class="form-group">
+                <label for="internshipTitle">Internship Title:</label>
+                <input type="text" id="internshipTitle" name="internshipTitle">
+            </div>
+            <div class="form-group">
+                <label for="internshipDesc">Internship Description:</label>
+                <textarea id="internshipDesc" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="internshipStart">Start Date:</label>
+                <input type="date" id="internshipStart" name="internshipStart">
+            </div>
+            <div class="form-group">
+                <label for="internshipEnd">End Date:</label>
+                <input type="date" id="internshipEnd" name="internshipEnd">
+            </div>
+        </div>
+        <button type="button" class="add-more-btn" onclick="addMore('internshipFields')">+ Add More Internship</button>
+    </div>
+
+    <!-- Projects -->
+    <div class="collapse-section" onclick="toggleSection('projectSection')">Project Details</div>
+    <div id="projectSection" class="section-content">
+        <div id="projectFields">
+            <div class="form-group">
+                <label for="projectTitle">Project Title:</label>
+                <input type="text" id="projectTitle" name="projectTitle">
+            </div>
+            <div class="form-group">
+                <label for="projectDesc">Project Description:</label>
+                <textarea id="projectDesc" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="projectStart">Start Date:</label>
+                <input type="date" id="projectStart" name="projectStart">
+            </div>
+            <div class="form-group">
+                <label for="githubLink">GitHub Link:</label>
+                <input type="url" id="githubLink" name="githubLink">
+            </div>
+        </div>
+        <button type="button" class="add-more-btn" onclick="addMore('projectFields')">+ Add More Project</button>
+    </div>
+
+    <!-- Certifications -->
+    <div class="collapse-section" onclick="toggleSection('certificationSection')">Certifications</div>
+    <div id="certificationSection" class="section-content">
+        <textarea id="certifications" rows="3" placeholder="List certifications"></textarea>
+    </div>
+
+    <!-- Declaration and Signature -->
+    <div class="collapse-section" onclick="toggleSection('declarationSection')">Declaration & Signature</div>
+    <div id="declarationSection" class="section-content">
+        <p>
+            I hereby declare that the information given above is true and correct to the best of my knowledge and belief. I understand that any discrepancy or false information provided may result in rejection of my resume or termination of employment if discovered later.
+        </p>
+        <div class="form-group">
+            <label for="signature">Signature:</label>
+            <input type="text" id="signature" name="signature" placeholder="Sign here">
+        </div>
+    </div>
+
+    <!-- Generate Resume -->
+    <button id="generateResume" onclick="generatePDF()">Generate Resume (PDF)</button>
+</div>
+
+<script>
+    function toggleSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        section.classList.toggle('open');
+    }
+
+    function previewImage(event) {
+        const image = document.getElementById('profileImage');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        image.style.display = 'block';
+    }
+
+    function addMore(fieldId) {
+        const container = document.getElementById(fieldId);
+        const newFields = container.children[0].cloneNode(true);
+        container.appendChild(newFields);
+    }
+
+    function generatePDF() {
+        // Add code here to generate a PDF format of the form
+        alert('PDF generation is not yet implemented.');
+    }
+</script>
+</body>
+</html>
