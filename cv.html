@@ -3,91 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            width: 210mm;
-            margin: 0 auto;
-            background-color: #f4f4f4;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        .container {
-            width: 100%;
-            max-width: 700px;
-            margin: 20px auto;
-            padding: 20px;
-            background: white;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .rounded-img {
-            display: block;
-            margin-top: 10px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .collapse-section {
-            cursor: pointer;
-            font-weight: bold;
-            padding: 10px;
-            background-color: #f7f7f7;
-            border: 1px solid #ddd;
-            margin-bottom: 5px;
-        }
-        .section-content {
-            display: none;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-        }
-        .section-content.open {
-            display: block;
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1em;
-        }
-        button:hover {
-            background-color: #4cae4c;
-        }
-        .add-more-btn {
-            margin-top: 10px;
-            background-color: #5bc0de;
-            border: none;
-            cursor: pointer;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
-        }
-    </style>
+    <title>Resume Form</title>    
+    <link rel="stylesheet" href="cv.css">
 </head>
 <body>
 
@@ -249,12 +166,41 @@
         image.style.display = 'block';
     }
 
-    function addMore(fieldId) {
-        const container = document.getElementById(fieldId);
-        const newFields = container.children[0].cloneNode(true);
-        container.appendChild(newFields);
+    let educationCount = 0;
+let internshipCount = 0;
+let projectCount = 0;
+
+function addMore(fieldId) {
+    const container = document.getElementById(fieldId);
+    const newFields = container.children[0].cloneNode(true);
+
+    // Update the ID attributes and clear values for each cloned input field
+    const inputs = newFields.querySelectorAll("input, textarea");
+    inputs.forEach((input) => {
+        // Remove the id if it's not required or generate a unique one
+        if (fieldId === 'educationFields') {
+            input.id = `${input.name}-${educationCount}`;
+            input.value = ''; // Clear the value for new entries
+        } else if (fieldId === 'internshipFields') {
+            input.id = `${input.name}-${internshipCount}`;
+            input.value = '';
+        } else if (fieldId === 'projectFields') {
+            input.id = `${input.name}-${projectCount}`;
+            input.value = '';
+        }
+    });
+
+    // Increment the counter for the specific field
+    if (fieldId === 'educationFields') {
+        educationCount++;
+    } else if (fieldId === 'internshipFields') {
+        internshipCount++;
+    } else if (fieldId === 'projectFields') {
+        projectCount++;
     }
 
+    container.appendChild(newFields);
+}
     function generatePDF() {
         // Add code here to generate a PDF format of the form
         alert('PDF generation is not yet implemented.');
